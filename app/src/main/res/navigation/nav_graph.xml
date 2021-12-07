@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/fragment_add_student">
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_edit_student">
-
     <fragment
         android:id="@+id/fragment_edit_student"
         android:name="com.example.studentsdb_fragments.fragment_edit_student"
