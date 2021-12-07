@@ -131,7 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="15dp"
         android:backgroundTint="#BCB2B2"
-        android:text="Button"
+        android:text="save"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/addStudent_cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
