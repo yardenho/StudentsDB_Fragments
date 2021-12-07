@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,13 +57,15 @@ public class fragment_students_list extends Fragment {
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void OnItemClick(int position) {
+            public void OnItemClick(int position, View v) {
                 //כאן צריך לפתוח את האקטיביטי של הצגת פרטים לפי המיקום הספציפי
 //                Intent intent = new Intent(StudentRecyclerActivity.this, Present_student_details.class);
 //                intent.putExtra("pos", position);
 //                startActivity(intent);
-//                Log.d("TAG", "row was clicked " + position);
-
+                Log.d("TAG", "row was clicked " + position);
+                String studentID = data.get(position).getID();
+                fragment_students_listDirections.ActionFragmentStudentsListToFragmentStudentDetails action = fragment_students_listDirections.actionFragmentStudentsListToFragmentStudentDetails(studentID);
+                Navigation.findNavController(v).navigate(action);
             }
         });
 
@@ -103,7 +106,7 @@ public class fragment_students_list extends Fragment {
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    listener.OnItemClick(pos);
+                    listener.OnItemClick(pos, v);
                 }
             });
 
@@ -124,7 +127,7 @@ public class fragment_students_list extends Fragment {
     }
 
     public interface OnItemClickListener{
-        void OnItemClick(int position);
+        void OnItemClick(int position, View v);
     }
 
     public interface OnCbClickListener{

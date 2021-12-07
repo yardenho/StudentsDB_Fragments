@@ -39,7 +39,7 @@
             android:id="@+id/action_fragment_students_list_to_fragment_add_student"
             app:destination="@id/fragment_add_student" />
         <action
-            android:id="@+id/action_fragment_students_list_to_fragment_student_details2"
+            android:id="@+id/action_fragment_students_list_to_fragment_student_details"
             app:destination="@id/fragment_student_details" />
     </fragment>
     <action android:id="@+id/action_global_fragment_students_list" app:destination="@id/fragment_students_list" />
