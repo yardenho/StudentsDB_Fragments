@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_add_student">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/fragment_edit_student">
 
     <fragment
@@ -10,4 +13,14 @@
         android:name="com.example.studentsdb_fragments.fragment_edit_student"
         android:label="fragment_edit_student"
         tools:layout="@layout/fragment_edit_student" />
+    <fragment
+        android:id="@+id/fragment_add_student"
+        android:name="com.example.studentsdb_fragments.fragment_add_student"
+        android:label="fragment_add_student"
+        tools:layout="@layout/fragment_add_student" />
+    <fragment
+        android:id="@+id/fragment_add_student2"
+        android:name="com.example.studentsdb_fragments.fragment_add_student"
+        android:label="fragment_add_student"
+        tools:layout="@layout/fragment_add_student" />
 </navigation>
