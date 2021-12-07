@@ -14,6 +14,11 @@
         android:label="fragment_edit_student"
         tools:layout="@layout/fragment_edit_student" />
     <fragment
+        android:id="@+id/fragment_student_details"
+        android:name="com.example.studentsdb_fragments.fragment_student_details"
+        android:label="fragment_student_details"
+        tools:layout="@layout/fragment_student_details" />
+    <fragment
         android:id="@+id/fragment_add_student"
         android:name="com.example.studentsdb_fragments.fragment_add_student"
         android:label="fragment_add_student"
