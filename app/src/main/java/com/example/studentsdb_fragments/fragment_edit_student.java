@@ -69,8 +69,8 @@ public class fragment_edit_student extends Fragment {
             @Override
             public void onClick(View v) {
                 Model.getInstance().deleteStudentByID(student.getID());
-                NavDirections action = fragment_edit_studentDirections.actionGlobalFragmentStudentsList();
-                Navigation.findNavController(v).navigate(action);
+                fm.popBackStack();
+                fm.popBackStack();
             }
         });
 
