@@ -26,9 +26,18 @@ public class Model {
     public void deleteStudent(int pos){
         data.remove(pos);
     }
+    public Student getStudentByID(String id)
+    {
+        for( Student s: data) {
+            if (s.getID().equals(id))
+                return s;
+        }
+        return null;
+    }
 
     public static Model getInstance(){
         return instance;
     }
+
 
 }
