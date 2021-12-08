@@ -13,12 +13,11 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    NavController navctrl;
+    private NavController navctrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         NavHostFragment nav_host =(NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.base_navHost);
         navctrl = nav_host.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navctrl);
@@ -41,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_about:
                     AboutDialogFragment dialog = new AboutDialogFragment();
                     dialog.show(getSupportFragmentManager(), "TAG");
-
-
                     return true;
                 default:
                     return NavigationUI.onNavDestinationSelected(item, navctrl);

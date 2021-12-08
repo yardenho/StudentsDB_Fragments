@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,9 +20,7 @@ public class AboutDialogFragment extends DialogFragment {
 
         builder.setNeutralButton("ok", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // empty?
-            }
+            public void onClick(DialogInterface dialog, int which) {}
         });
         return builder.create();
     }

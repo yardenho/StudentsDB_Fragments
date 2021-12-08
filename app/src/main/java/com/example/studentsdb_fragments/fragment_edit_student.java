@@ -1,32 +1,22 @@
 package com.example.studentsdb_fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
-
 import java.util.List;
 
 
 public class fragment_edit_student extends Fragment {
-
     private List<Student> data;
 
     public fragment_edit_student(){};  // empty ctor
@@ -70,7 +60,6 @@ public class fragment_edit_student extends Fragment {
             @Override
             public void onClick(View v) {
                 Model.getInstance().deleteStudentByID(student.getID());
-//                Navigation.findNavController(view).navigateUp();
                 Navigation.findNavController(view).navigate(R.id.fragment_students_list);
             }
         });
@@ -86,7 +75,6 @@ public class fragment_edit_student extends Fragment {
                 Navigation.findNavController(view).navigateUp();
             }
         });
-
         return view;
     }
 }

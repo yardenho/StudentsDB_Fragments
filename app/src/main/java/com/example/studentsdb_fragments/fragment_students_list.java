@@ -1,15 +1,11 @@
 package com.example.studentsdb_fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,15 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
-
 import java.util.List;
 
 public class fragment_students_list extends Fragment {
-    List<Student> data;
-    View view;
+    private List<Student> data;
+    private View view;
 
     public fragment_students_list() {
         // Required empty public constructor
@@ -49,37 +43,24 @@ public class fragment_students_list extends Fragment {
         MyAdapter adapter = new MyAdapter();
         list.setAdapter(adapter);
 
-        //// ******************************************************************to check***********
-
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void OnItemClick(int position, View v) {
-                //כאן צריך לפתוח את האקטיביטי של הצגת פרטים לפי המיקום הספציפי
-//                Intent intent = new Intent(StudentRecyclerActivity.this, Present_student_details.class);
-//                intent.putExtra("pos", position);
-//                startActivity(intent);
-//                Log.d("A", "row was clicked " + position);
                 String studentID = data.get(position).getID();
-                Log.d("TAG", "id" + studentID);
                 fragment_students_listDirections.ActionFragmentStudentsListToFragmentStudentDetails action = fragment_students_listDirections.actionFragmentStudentsListToFragmentStudentDetails(studentID);
                 Navigation.findNavController(v).navigate(action);
             }
         });
 
-        //// ******************************************************************to check***********
-
         adapter.setOnCbClickListener(new OnCbClickListener() {
             @Override
             public void OnCbClick(int position) {
                 Student student = data.get(position);
-                Log.d("TAG", "the cb:" +!student.getcb());
                 student.setCB(!student.getcb());
-                Log.d("TAG", "checkBox was clicked "+ position);
             }
         });
 
         setHasOptionsMenu(true);
-
         return view;
     }
 

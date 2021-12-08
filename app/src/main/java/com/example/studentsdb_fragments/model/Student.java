@@ -45,6 +45,4 @@ public class Student {
     public void setAddress(String newAdd){
         address = newAdd;
     }
-
-
 }

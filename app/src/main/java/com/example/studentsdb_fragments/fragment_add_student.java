@@ -20,9 +20,7 @@ import java.util.List;
 
 public class fragment_add_student extends Fragment {
     private List<Student> data;
-    public fragment_add_student() {
-        // Required empty public constructor
-    }
+    public fragment_add_student() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

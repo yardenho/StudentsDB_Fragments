@@ -10,11 +10,9 @@ public class Model {
     private List<Student> data = new LinkedList<Student>();
 
     private Model(){ }
-
     public List<Student> getStudentList(){
         return data;
     }
-
     public void addNewStudent(Student student){
         data.add(student);
     }
@@ -30,8 +28,6 @@ public class Model {
         return null;
     }
 
-
-
     public void deleteStudentByID(String id)
     {
         for( Student s: data) {
@@ -42,17 +38,7 @@ public class Model {
         }
     }
 
-    public boolean checkIfStudentExists(Student student){
-        for( Student s: data) {
-            if (s == student)
-                return true;
-        }
-        return false;
-    }
-
     public static Model getInstance(){
         return instance;
     }
-
-
 }

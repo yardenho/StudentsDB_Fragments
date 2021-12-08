@@ -1,35 +1,28 @@
 package com.example.studentsdb_fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
-
 import java.util.List;
 
 
 public class fragment_student_details extends Fragment {
-
-    List<Student> data;
-    TextView nameTv;
-    TextView idTv;
-    CheckBox cbTv;
-    TextView phoneTv;
-    TextView addressTv;
-    View view;
-    Student s = null;
+    private List<Student> data;
+    private TextView nameTv;
+    private TextView idTv;
+    private CheckBox cbTv;
+    private TextView phoneTv;
+    private TextView addressTv;
+    private View view;
+    private Student s = null;
 
     public fragment_student_details() {};   // empty Ctor
 
@@ -51,7 +44,6 @@ public class fragment_student_details extends Fragment {
         if (s != null )
             setDetails(s);
 
-
         Button editBtn = view.findViewById(R.id.studentDetails_edit_btn);
         editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +54,6 @@ public class fragment_student_details extends Fragment {
         });
         return view;
     }
-
 
 
     private void setDetails(Student student) {
