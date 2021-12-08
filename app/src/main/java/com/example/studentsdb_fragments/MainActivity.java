@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     navctrl.navigateUp();
                     return true;
                 case R.id.menu_about:
-//                    SettingsDialogFragment dialog = new SettingsDialogFragment();
-//                    dialog.show(getSupportFragmentManager(), "TAG");
+                    AboutDialogFragment dialog = new AboutDialogFragment();
+                    dialog.show(getSupportFragmentManager(), "TAG");
                     return true;
                 default:
                     return NavigationUI.onNavDestinationSelected(item, navctrl);
