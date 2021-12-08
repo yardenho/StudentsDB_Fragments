@@ -28,6 +28,8 @@ public class fragment_student_details extends Fragment {
     CheckBox cbTv;
     TextView phoneTv;
     TextView addressTv;
+    View view;
+    Student s = null;
 
     public fragment_student_details() {};   // empty Ctor
 
@@ -35,7 +37,7 @@ public class fragment_student_details extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_student_details, container, false);
+        view = inflater.inflate(R.layout.fragment_student_details, container, false);
         String studentID = fragment_student_detailsArgs.fromBundle(getArguments()).getStudentID();
         data = Model.getInstance().getStudentList();
         nameTv = view.findViewById(R.id.studentDetails_name_p);
@@ -44,9 +46,11 @@ public class fragment_student_details extends Fragment {
         phoneTv = view.findViewById(R.id.studentDetails_phone_p);
         addressTv = view.findViewById(R.id.studentDetails_address_p);
 
-        Student s = Model.getInstance().getStudentByID(studentID);
+        if(s == null)
+            s = Model.getInstance().getStudentByID(studentID);
         if (s != null )
             setDetails(s);
+
 
         Button editBtn = view.findViewById(R.id.studentDetails_edit_btn);
         editBtn.setOnClickListener(new View.OnClickListener() {
@@ -56,9 +60,10 @@ public class fragment_student_details extends Fragment {
                 Navigation.findNavController(v).navigate(action);
             }
         });
-
         return view;
     }
+
+
 
     private void setDetails(Student student) {
         nameTv.setText(student.getName());

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -28,12 +30,6 @@ public class fragment_students_list extends Fragment {
 
     public fragment_students_list() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -62,8 +58,9 @@ public class fragment_students_list extends Fragment {
 //                Intent intent = new Intent(StudentRecyclerActivity.this, Present_student_details.class);
 //                intent.putExtra("pos", position);
 //                startActivity(intent);
-                Log.d("TAG", "row was clicked " + position);
+//                Log.d("A", "row was clicked " + position);
                 String studentID = data.get(position).getID();
+                Log.d("TAG", "id" + studentID);
                 fragment_students_listDirections.ActionFragmentStudentsListToFragmentStudentDetails action = fragment_students_listDirections.actionFragmentStudentsListToFragmentStudentDetails(studentID);
                 Navigation.findNavController(v).navigate(action);
             }
@@ -81,10 +78,16 @@ public class fragment_students_list extends Fragment {
             }
         });
 
+        setHasOptionsMenu(true);
 
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.students_list_menu, menu);
+    }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         private final OnItemClickListener listener;

@@ -3,62 +3,63 @@ package com.example.studentsdb_fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link fragment_add_student#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.studentsdb_fragments.model.Model;
+import com.example.studentsdb_fragments.model.Student;
+
+import java.util.List;
+
+
 public class fragment_add_student extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private List<Student> data;
     public fragment_add_student() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_add_student.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static fragment_add_student newInstance(String param1, String param2) {
-        fragment_add_student fragment = new fragment_add_student();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_student, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_student, container, false);
+
+        Button saveBtn = view.findViewById(R.id.addStudent_save_btn);
+        Button cancelBtn  = view.findViewById(R.id.addStudent_cancel_btn);
+        EditText nameTv = view.findViewById(R.id.addStudent_name_et);
+        EditText idTv = view.findViewById(R.id.addStudent_id_et);
+        EditText phoneTv = view.findViewById(R.id.addStudent_phone_et);
+        EditText addressTv = view.findViewById(R.id.addStudent_address_et);
+        CheckBox cb = view.findViewById(R.id.addStudent_cb);
+
+        data = Model.getInstance().getStudentList();
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Student student= new Student();
+                student.setName(nameTv.getText().toString());
+                student.setID(idTv.getText().toString());
+                student.setPhoneNumber(phoneTv.getText().toString());
+                student.setAddress(addressTv.getText().toString());
+                student.setCB(cb.isChecked());
+                data.add(student);
+                Navigation.findNavController(v).navigateUp();
+            }
+        });
+
+        return view;
     }
 }

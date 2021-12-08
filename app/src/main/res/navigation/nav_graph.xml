@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/fragment_edit_student"
         android:name="com.example.studentsdb_fragments.fragment_edit_student"
-        android:label="fragment_edit_student"
-        tools:layout="@layout/fragment_edit_student" >
+        android:label="Edit Student"
+        tools:layout="@layout/fragment_edit_student">
         <argument
             android:name="studentID"
             app:argType="string" />
@@ -16,8 +16,8 @@
     <fragment
         android:id="@+id/fragment_student_details"
         android:name="com.example.studentsdb_fragments.fragment_student_details"
-        android:label="fragment_student_details"
-        tools:layout="@layout/fragment_student_details" >
+        android:label="Student Details"
+        tools:layout="@layout/fragment_student_details">
         <action
             android:id="@+id/action_fragment_student_details_to_fragment_edit_student"
             app:destination="@id/fragment_edit_student" />
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/fragment_add_student"
         android:name="com.example.studentsdb_fragments.fragment_add_student"
-        android:label="fragment_add_student"
+        android:label="Add Student"
         tools:layout="@layout/fragment_add_student" />
     <fragment
         android:id="@+id/fragment_students_list"

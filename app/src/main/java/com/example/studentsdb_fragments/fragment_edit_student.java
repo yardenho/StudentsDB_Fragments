@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -61,7 +62,7 @@ public class fragment_edit_student extends Fragment {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm.popBackStack();
+                Navigation.findNavController(view).navigateUp();
             }
         });
 
@@ -69,24 +70,22 @@ public class fragment_edit_student extends Fragment {
             @Override
             public void onClick(View v) {
                 Model.getInstance().deleteStudentByID(student.getID());
-                fm.popBackStack();
-                fm.popBackStack();
+//                Navigation.findNavController(view).navigateUp();
+                Navigation.findNavController(view).navigate(R.id.fragment_students_list);
             }
         });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Student student = data.get(position);
-//                student.setName(nameTv.getText().toString());
-//                student.setID(idTv.getText().toString());
-//                student.setPhoneNumber(phoneTv.getText().toString());
-//                student.setAddress(addressTv.getText().toString());
-//                student.setCB(cbTv.isChecked());
-//                finish();
+                student.setName(nameTv.getText().toString());
+                student.setID(idTv.getText().toString());
+                student.setPhoneNumber(phoneTv.getText().toString());
+                student.setAddress(addressTv.getText().toString());
+                student.setCB(cbTv.isChecked());
+                Navigation.findNavController(view).navigateUp();
             }
         });
-
 
         return view;
     }

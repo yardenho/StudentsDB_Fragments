@@ -1,5 +1,7 @@
 package com.example.studentsdb_fragments.model;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,12 +37,24 @@ public class Model {
         return null;
     }
 
+
+
     public void deleteStudentByID(String id)
     {
         for( Student s: data) {
-            if (s.getID().equals(id))
+            if (s.getID().equals(id)) {
                 data.remove(s);
+                return;
+            }
         }
+    }
+
+    public boolean checkIfStudentExists(Student student){
+        for( Student s: data) {
+            if (s == student)
+                return true;
+        }
+        return false;
     }
 
     public static Model getInstance(){
