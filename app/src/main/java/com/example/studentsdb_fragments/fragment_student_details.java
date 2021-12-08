@@ -29,10 +29,7 @@ public class fragment_student_details extends Fragment {
     TextView phoneTv;
     TextView addressTv;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    public fragment_student_details() {};   // empty Ctor
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
