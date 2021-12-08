@@ -1,6 +1,7 @@
 package com.example.studentsdb_fragments;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -9,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     NavController navctrl;
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_about:
                     AboutDialogFragment dialog = new AboutDialogFragment();
                     dialog.show(getSupportFragmentManager(), "TAG");
+
+
                     return true;
                 default:
                     return NavigationUI.onNavDestinationSelected(item, navctrl);

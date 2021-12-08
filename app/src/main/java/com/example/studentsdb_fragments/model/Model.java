@@ -9,14 +9,7 @@ public class Model {
     static  final private Model instance = new Model();
     private List<Student> data = new LinkedList<Student>();
 
-    private Model(){
-        for(int i=0; i<4 ;++i){
-            Student s = new Student();
-            s.setName("kuku " + i);
-            s.setID("000" + i);
-            data.add(s);
-        }
-    }
+    private Model(){ }
 
     public List<Student> getStudentList(){
         return data;
