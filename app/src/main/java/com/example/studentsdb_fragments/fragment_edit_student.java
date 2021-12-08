@@ -3,9 +3,11 @@ package com.example.studentsdb_fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -66,10 +68,9 @@ public class fragment_edit_student extends Fragment {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                data.remove(position);
-//                Intent intent = new Intent(EditStudent.this, StudentRecyclerActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
+                Model.getInstance().deleteStudentByID(student.getID());
+                NavDirections action = fragment_edit_studentDirections.actionGlobalFragmentStudentsList();
+                Navigation.findNavController(v).navigate(action);
             }
         });
 

@@ -35,6 +35,14 @@ public class Model {
         return null;
     }
 
+    public void deleteStudentByID(String id)
+    {
+        for( Student s: data) {
+            if (s.getID().equals(id))
+                data.remove(s);
+        }
+    }
+
     public static Model getInstance(){
         return instance;
     }
