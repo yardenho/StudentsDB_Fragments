@@ -1,6 +1,13 @@
 package com.example.studentsdb_fragments.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Student {
+    @PrimaryKey
+    @NonNull
     private String name;
     private String id;
     private boolean cb;
@@ -18,10 +25,10 @@ public class Student {
     public String getName(){
         return name;
     }
-    public String getID(){
+    public String getId(){
         return id;
     }
-    public boolean getcb(){
+    public boolean getCb(){
         return cb;
     }
     public String getPhoneNumber(){
@@ -33,10 +40,10 @@ public class Student {
     public void setName(String newName){
         name = newName;
     }
-    public void setID(String newID){
+    public void setId(String newID){
         id = newID;
     }
-    public void setCB(boolean newCB){
+    public void setCb(boolean newCB){
         cb = newCB;
     }
     public void setPhoneNumber(String newNum){

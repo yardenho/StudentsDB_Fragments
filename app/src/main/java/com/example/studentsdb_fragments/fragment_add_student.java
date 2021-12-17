@@ -11,16 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class fragment_add_student extends Fragment {
-    private List<Student> data;
+    private List<Student> data = new LinkedList<Student>();
     public fragment_add_student() {}
+    ProgressBar pb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,8 +38,15 @@ public class fragment_add_student extends Fragment {
         EditText phoneTv = view.findViewById(R.id.addStudent_phone_et);
         EditText addressTv = view.findViewById(R.id.addStudent_address_et);
         CheckBox cb = view.findViewById(R.id.addStudent_cb);
-
-        data = Model.getInstance().getStudentList();
+        pb = view.findViewById(R.id.saddStudent_progressBar);
+        pb.setVisibility(View.GONE);
+        ///////////////*****************************///שינויים עם הליסטנר************************************
+        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
+            @Override
+            public void onComplete(List<Student> d) {
+                data = d;
+            }
+        });
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,14 +57,18 @@ public class fragment_add_student extends Fragment {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
+                saveBtn.setEnabled(false);
+                cancelBtn.setEnabled(false);
                 Student student= new Student();
                 student.setName(nameTv.getText().toString());
-                student.setID(idTv.getText().toString());
+                student.setId(idTv.getText().toString());
                 student.setPhoneNumber(phoneTv.getText().toString());
                 student.setAddress(addressTv.getText().toString());
-                student.setCB(cb.isChecked());
-                data.add(student);
-                Navigation.findNavController(v).navigateUp();
+                student.setCb(cb.isChecked());
+                Model.getInstance().addNewStudent(student,()->{
+                    Navigation.findNavController(v).navigateUp();
+                });
             }
         });
 

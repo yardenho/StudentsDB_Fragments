@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,11 +16,14 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
+
+import java.util.LinkedList;
 import java.util.List;
 
 public class fragment_students_list extends Fragment {
-    private List<Student> data;
+    private List<Student> data = new LinkedList<Student>();
     private View view;
+    private MyAdapter adapter;
 
     public fragment_students_list() {
         // Required empty public constructor
@@ -38,15 +41,21 @@ public class fragment_students_list extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list.setLayoutManager(layoutManager);
 
-        data = Model.getInstance().getStudentList();
+        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
+            @Override
+            public void onComplete(List<Student> d) {
+                data = d;
+                adapter.notifyDataSetChanged();
+            }
+        });
         //נחבר את האקטיביטי עם האדפטר
-        MyAdapter adapter = new MyAdapter();
+        adapter = new MyAdapter();
         list.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void OnItemClick(int position, View v) {
-                String studentID = data.get(position).getID();
+                String studentID = data.get(position).getId();
                 fragment_students_listDirections.ActionFragmentStudentsListToFragmentStudentDetails action = fragment_students_listDirections.actionFragmentStudentsListToFragmentStudentDetails(studentID);
                 Navigation.findNavController(v).navigate(action);
             }
@@ -56,7 +65,7 @@ public class fragment_students_list extends Fragment {
             @Override
             public void OnCbClick(int position) {
                 Student student = data.get(position);
-                student.setCB(!student.getcb());
+                student.setCb(!student.getCb());
             }
         });
 
@@ -105,8 +114,8 @@ public class fragment_students_list extends Fragment {
 
         public void bind(Student student){
             name.setText(student.getName());
-            id.setText(student.getID());
-            cb.setChecked(student.getcb());
+            id.setText(student.getId());
+            cb.setChecked(student.getCb());
         }
     }
 
