@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,7 +15,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,9 +64,11 @@ public class fragment_students_list extends Fragment {
             public void OnCbClick(int position) {
                 Student student = data.get(position);
                 student.setCb(!student.getCb());
+                Model.getInstance().editStudent(student, () -> {
+                    adapter.notifyDataSetChanged();
+                });
             }
         });
-
         setHasOptionsMenu(true);
         return view;
     }
@@ -88,7 +88,6 @@ public class fragment_students_list extends Fragment {
         CheckBox cb;
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener, OnCbClickListener cbListener) {
             super(itemView);
-
             name = itemView.findViewById(R.id.StudentsListRow_name_t);
             id = itemView.findViewById(R.id.StudentsListRow_id_t);
             cb = itemView.findViewById(R.id.StudentsListRow_cb);

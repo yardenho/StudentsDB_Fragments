@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 public class Student {
     @PrimaryKey
     @NonNull
-    private String name;
     private String id;
+    private String name;
     private boolean cb;
     private String phoneNumber;
     private String address;

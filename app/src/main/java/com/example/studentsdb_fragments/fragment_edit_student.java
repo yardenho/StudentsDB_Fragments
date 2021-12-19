@@ -3,9 +3,7 @@ package com.example.studentsdb_fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,23 +14,18 @@ import android.widget.TextView;
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
 
-import java.util.LinkedList;
-import java.util.List;
-
-
 public class fragment_edit_student extends Fragment {
-//    private List<Student> data = new LinkedList<Student>();
     private Student student=null;
-    TextView nameTv;
-    TextView idTv;
-    CheckBox cbTv;
-    TextView phoneTv;
-    TextView addressTv;
-    Button cancelBtn;
-    Button deleteBtn;
-    Button saveBtn;
-    ProgressBar pb;
-    String studentID;
+    private TextView nameTv;
+    private TextView idTv;
+    private CheckBox cbTv;
+    private TextView phoneTv;
+    private TextView addressTv;
+    private Button cancelBtn;
+    private Button deleteBtn;
+    private Button saveBtn;
+    private ProgressBar pb;
+    private String studentID;
 
     public fragment_edit_student(){};  // empty ctor
 
@@ -41,13 +34,6 @@ public class fragment_edit_student extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_student, container, false);
-        ///// עשינו פה שינויםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםם עם הליסטנר
-//        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
-//            @Override
-//            public void onComplete(List<Student> d) {
-//                data = d;
-//            }
-//        });
         nameTv = view.findViewById(R.id.editStudent_name_et);
         idTv = view.findViewById(R.id.editStudent_id_et);
         cbTv = view.findViewById(R.id.editStudent_checked_cb);
@@ -92,7 +78,7 @@ public class fragment_edit_student extends Fragment {
                 newStudent.setPhoneNumber(phoneTv.getText().toString());
                 newStudent.setAddress(addressTv.getText().toString());
                 newStudent.setCb(cbTv.isChecked());
-                Model.getInstance().editStudent(student, newStudent, () -> {
+                Model.getInstance().editStudent(newStudent, () -> {
                     Navigation.findNavController(view).navigateUp();
                 });
             }

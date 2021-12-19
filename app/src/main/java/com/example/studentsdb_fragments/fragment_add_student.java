@@ -1,10 +1,8 @@
 package com.example.studentsdb_fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
 import com.example.studentsdb_fragments.model.Model;
 import com.example.studentsdb_fragments.model.Student;
 
-import java.util.LinkedList;
-import java.util.List;
-
 
 public class fragment_add_student extends Fragment {
-    private List<Student> data = new LinkedList<Student>();
+    private ProgressBar pb;
+
     public fragment_add_student() {}
-    ProgressBar pb;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,13 +34,7 @@ public class fragment_add_student extends Fragment {
         CheckBox cb = view.findViewById(R.id.addStudent_cb);
         pb = view.findViewById(R.id.saddStudent_progressBar);
         pb.setVisibility(View.GONE);
-        ///////////////*****************************///שינויים עם הליסטנר************************************
-        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
-            @Override
-            public void onComplete(List<Student> d) {
-                data = d;
-            }
-        });
+
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

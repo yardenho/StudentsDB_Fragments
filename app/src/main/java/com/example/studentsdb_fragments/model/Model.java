@@ -73,13 +73,8 @@ public class Model {
         void onComplete();
     }
 
-    public void editStudent(Student oldStudent, Student s,editStudentListener listener){
+    public void editStudent(Student s,editStudentListener listener){
         MyApplication.executorService.execute(()->{
-//            oldStudent.setName(s.getName());
-////            oldStudent.setId(s.getId());
-//            oldStudent.setPhoneNumber(s.getPhoneNumber());
-//            oldStudent.setAddress(s.getAddress());
-//            oldStudent.setCb(s.getCb());
             AppLocalDB.db.studentDao().editStudent(s);
             MyApplication.mainHandler.post(()->{
                 listener.onComplete();
