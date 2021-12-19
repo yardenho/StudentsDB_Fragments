@@ -1,5 +1,7 @@
 package com.example.studentsdb_fragments.model;
 
+import android.util.Log;
+
 import com.example.studentsdb_fragments.MyApplication;
 
 import java.util.LinkedList;
@@ -38,9 +40,6 @@ public class Model {
         });
     }
 
-    public void deleteStudent(int pos){
-        data.remove(pos);
-    }
 
     public interface getStudentByIDListener{
         void onComplete(Student student);
@@ -56,14 +55,18 @@ public class Model {
         });
     }
 
-    public void deleteStudentByID(String id)
+    public interface deleteStudentByIDListener{
+        void onComplete();
+    }
+
+    public void deleteStudentByID(Student student,deleteStudentByIDListener listener )
     {
-        for( Student s: data) {
-            if (s.getId().equals(id)) {
-                data.remove(s);
-                return;
-            }
-        }
+        MyApplication.executorService.execute(()->{
+            AppLocalDB.db.studentDao().delete(student);
+            MyApplication.mainHandler.post(()->{
+                listener.onComplete();
+            });
+        });
     }
 
     public interface editStudentListener{
@@ -72,17 +75,19 @@ public class Model {
 
     public void editStudent(Student oldStudent, Student s,editStudentListener listener){
         MyApplication.executorService.execute(()->{
-            oldStudent.setName(s.getName());
-            oldStudent.setId(s.getId());
-            oldStudent.setPhoneNumber(s.getPhoneNumber());
-            oldStudent.setAddress(s.getAddress());
-            oldStudent.setCb(s.getCb());
-            AppLocalDB.db.studentDao().editStudent(oldStudent);
+//            oldStudent.setName(s.getName());
+////            oldStudent.setId(s.getId());
+//            oldStudent.setPhoneNumber(s.getPhoneNumber());
+//            oldStudent.setAddress(s.getAddress());
+//            oldStudent.setCb(s.getCb());
+            AppLocalDB.db.studentDao().editStudent(s);
             MyApplication.mainHandler.post(()->{
                 listener.onComplete();
             });
         });
     }
+
+
     public static Model getInstance(){
         return instance;
     }

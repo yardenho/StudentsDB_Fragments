@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import java.util.List;
 
 
 public class fragment_edit_student extends Fragment {
-    private List<Student> data = new LinkedList<Student>();
+//    private List<Student> data = new LinkedList<Student>();
     private Student student=null;
     TextView nameTv;
     TextView idTv;
@@ -33,6 +32,7 @@ public class fragment_edit_student extends Fragment {
     Button deleteBtn;
     Button saveBtn;
     ProgressBar pb;
+    String studentID;
 
     public fragment_edit_student(){};  // empty ctor
 
@@ -42,12 +42,12 @@ public class fragment_edit_student extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_student, container, false);
         ///// עשינו פה שינויםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםםם עם הליסטנר
-        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
-            @Override
-            public void onComplete(List<Student> d) {
-                data = d;
-            }
-        });
+//        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
+//            @Override
+//            public void onComplete(List<Student> d) {
+//                data = d;
+//            }
+//        });
         nameTv = view.findViewById(R.id.editStudent_name_et);
         idTv = view.findViewById(R.id.editStudent_id_et);
         cbTv = view.findViewById(R.id.editStudent_checked_cb);
@@ -59,12 +59,11 @@ public class fragment_edit_student extends Fragment {
         pb = view.findViewById(R.id.editStudent_progressBar);
         pb.setVisibility(View.VISIBLE);
 
-        String studentID = fragment_edit_studentArgs.fromBundle(getArguments()).getStudentID();
+        studentID = fragment_edit_studentArgs.fromBundle(getArguments()).getStudentID();
         Model.getInstance().getStudentByID(studentID, (s)->{
             updateDisplay(s);
         });
 
-        FragmentManager fm = getActivity().getSupportFragmentManager();
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,8 +74,12 @@ public class fragment_edit_student extends Fragment {
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Model.getInstance().deleteStudentByID(student.getId());
-                Navigation.findNavController(view).navigate(R.id.fragment_students_list);
+                Model.getInstance().deleteStudentByID(student, new Model.deleteStudentByIDListener() {
+                    @Override
+                    public void onComplete() {
+                        Navigation.findNavController(view).navigate(R.id.fragment_students_list);
+                    }
+                });
             }
         });
 
@@ -89,7 +92,6 @@ public class fragment_edit_student extends Fragment {
                 newStudent.setPhoneNumber(phoneTv.getText().toString());
                 newStudent.setAddress(addressTv.getText().toString());
                 newStudent.setCb(cbTv.isChecked());
-
                 Model.getInstance().editStudent(student, newStudent, () -> {
                     Navigation.findNavController(view).navigateUp();
                 });
@@ -100,7 +102,6 @@ public class fragment_edit_student extends Fragment {
 
     private void updateDisplay(Student s) {
         student = s;
-        Log.d("TAG", "S - " + student.getId());
         if (student != null ) {
             nameTv.setText(student.getName());
             idTv.setText(student.getId());

@@ -20,7 +20,6 @@ import java.util.List;
 
 
 public class fragment_student_details extends Fragment {
-    private List<Student> data = new LinkedList<Student>();
     private TextView nameTv;
     private TextView idTv;
     private CheckBox cbTv;
@@ -28,7 +27,8 @@ public class fragment_student_details extends Fragment {
     private TextView addressTv;
     private View view;
     private Student s = null;
-    ProgressBar pb;
+    private ProgressBar pb;
+    String studentID = null;
 
     public fragment_student_details() {};   // empty Ctor
 
@@ -37,14 +37,15 @@ public class fragment_student_details extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_student_details, container, false);
-        String studentID = fragment_student_detailsArgs.fromBundle(getArguments()).getStudentID();
+        if(studentID == null)
+            studentID = fragment_student_detailsArgs.fromBundle(getArguments()).getStudentID();
         //////////******************************עשינו שינויים עם הליסטנר****************************************
-        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
-            @Override
-            public void onComplete(List<Student> d) {
-                data = d;
-            }
-        });
+//        Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
+//            @Override
+//            public void onComplete(List<Student> d) {
+//                data = d;
+//            }
+//        });
         nameTv = view.findViewById(R.id.studentDetails_name_p);
         idTv = view.findViewById(R.id.studentDetails_id_p);
         cbTv = view.findViewById(R.id.studentDetails_checked_cb_p);
@@ -52,30 +53,29 @@ public class fragment_student_details extends Fragment {
         addressTv = view.findViewById(R.id.studentDetails_address_p);
         pb = view.findViewById(R.id.studentDetails_progressBar);
         pb.setVisibility(View.VISIBLE);
-        //////שינויייייי
-        int position = data.indexOf(s);
-        //////שינויייייי
 
 
+        Model.getInstance().getStudentByID(studentID, (student) -> {
+            updateDisplay(student);
+        });
 
-        if(s == null)
-            Model.getInstance().getStudentByID(studentID, (student) -> {
-                updateDisplay(student);
-            });
-        if (s != null ) {
-            ////////*************שינויייייי//////////בשביל העידכון אחרי הedit
-            Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
-                @Override
-                public void onComplete(List<Student> d) {
-                    data = d;
-                }
-            });
-            Log.d("TAG", "s - " + position);
-            s = data.get(position);
-            ////////*************שינויייייי//////////
-
-            updateDisplay(s);
-        }
+//        if(s == null) {
+//            Model.getInstance().getStudentByID(studentID, (student) -> {
+//                updateDisplay(student);
+//            });
+//        }
+//        if (s != null ) {
+//            ////////*************שינויייייי//////////בשביל העידכון אחרי הedit
+//            Model.getInstance().getStudentList(new Model.GetAllStudentsListener() {
+//                @Override
+//                public void onComplete(List<Student> d) {
+//                    data = d;
+//
+//                    updateDisplay(s);
+//
+//                }
+//            });
+//        }
 
         Button editBtn = view.findViewById(R.id.studentDetails_edit_btn);
         editBtn.setOnClickListener(new View.OnClickListener() {
