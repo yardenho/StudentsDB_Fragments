@@ -49,7 +49,6 @@ public class fragment_edit_student extends Fragment {
         Model.getInstance().getStudentByID(studentID, (s)->{
             updateDisplay(s);
         });
-
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
